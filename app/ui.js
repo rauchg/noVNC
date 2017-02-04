@@ -66,9 +66,14 @@ var UI;
     // Set up translations
     var LINGUAS = ["de", "el", "nl", "sv"];
     Util.Localisation.setup(LINGUAS);
-    if (Util.Localisation.language !== "en") {
-        WebUtil.load_scripts(
-            {'app': ["locale/" + Util.Localisation.language + ".js"]});
+    if (Util.Localisation.language !== "en" && Util.Localisation.dictionary !== undefined) {
+        // NB: this only works with "native" ES6 modules and SystemJS modules -- the Babel translaters
+        // for CommonJS and AMD don't support this.  However, it is fairly easy to perform this logic
+        // yourself if you wish to package noVNC in CommonJS or AMD formats: simply load the appropriate
+        // language module and set Util.Localisation.dictionary to the default export of it.
+        import(`./locale/${Util.Localisation.language}.js`).then((language_mod) => {
+            Util.Localisation.dictionary = language_mod.default;
+        });
     }
 
     var _ = Util.Localisation.get;

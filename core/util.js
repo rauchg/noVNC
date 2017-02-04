@@ -371,6 +371,9 @@ Util.Localisation = {
     // Currently configured language
     language: 'en',
 
+    // Current dictionary of translations
+    dictionary: undefined,
+
     // Configure suitable language based on user preferences
     setup: function (supportedLanguages) {
         var userLanguages;
@@ -435,8 +438,8 @@ Util.Localisation = {
 
     // Retrieve localised text
     get: function (id) {
-        if (typeof Language !== 'undefined' && Language[id]) {
-            return Language[id];
+        if (typeof Util.Localisation.dictionary !== 'undefined' && Util.Localisation.dictionary[id]) {
+            return Util.Localisation.dictionary[id];
         } else {
             return id;
         }

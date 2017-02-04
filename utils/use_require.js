@@ -70,7 +70,7 @@ var make_lib_files = function (import_format, source_maps, with_app_dir) {
     }
 
     const babel_opts = {
-        plugins: [`transform-es2015-modules-${import_format}`],
+        plugins: [`transform-es2015-modules-${import_format}`, 'syntax-dynamic-import'],
         ast: false,
         sourceMaps: true,
     };

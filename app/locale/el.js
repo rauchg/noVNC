@@ -5,7 +5,7 @@
  * DO NOT EDIT!
  */
 
-Language = {
+export default {
     "Connecting...": "Συνδέεται...",
     "Connected (encrypted) to ": "Συνδέθηκε (κρυπτογραφημένα) με το ",
     "Connected (unencrypted) to ": "Συνδέθηκε (μη κρυπτογραφημένα) με το ",

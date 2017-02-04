@@ -40,7 +40,7 @@ var output =
 " * DO NOT EDIT!\n" +
 " */\n" +
 "\n" +
-"Language = {\n";
+"export default {\n";
 
 for (msgid in data) {
   if (msgid === "")

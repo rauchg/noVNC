@@ -5,7 +5,7 @@
  * DO NOT EDIT!
  */
 
-Language = {
+export default {
     "Connecting...": "Verbunden...",
     "Connected (encrypted) to ": "Verbunden mit (verschlüsselt) ",
     "Connected (unencrypted) to ": "Verbunden mit (unverschlüsselt) ",
