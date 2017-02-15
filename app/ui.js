@@ -61,19 +61,6 @@ window.addEventListener('error', function(event) {
     return false;
 });
 
-// Set up translations
-var LINGUAS = ["de", "el", "nl", "sv"];
-l10n.setup(LINGUAS);
-if (l10n.language !== "en" && l10n.dictionary !== undefined) {
-    // NB: this only works with "native" ES6 modules and SystemJS modules -- the Babel translaters
-    // for CommonJS and AMD don't support this.  However, it is fairly easy to perform this logic
-    // yourself if you wish to package noVNC in CommonJS or AMD formats: simply load the appropriate
-    // language module and set l10n.dictionary to the default export of it.
-    import(`./locale/${l10n.language}.js`).then((language_mod) => {
-        l10n.dictionary = language_mod.default;
-    });
-}
-
 const UI = {
 
     connected: false,
@@ -1714,6 +1701,21 @@ const UI = {
  */
 };
 
-export default UI;
+// Set up translations
+var LINGUAS = ["de", "el", "nl", "sv"];
+l10n.setup(LINGUAS);
+if (l10n.language !== "en" && l10n.dictionary === undefined) {
+    WebUtil.fetchJSON('app/locale/' + l10n.language + '.js', function (translations) {
+        l10n.dictionary = translations;
 
-UI.load();
+        // wait for translations to load before loading the UI
+        UI.load();
+    }, function (err) {
+        throw err; 
+    });
+} else {
+    UI.load();
+}
+
+
+export default UI;
